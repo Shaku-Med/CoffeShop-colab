@@ -1,8 +1,8 @@
 function Header() {
   return (
-    <header>
-      <h1>Coffee Shop</h1>
-      <p>Fresh coffee, made your way.</p>
+    <header className="header">
+      <h1 className="header-title">Coffee Shop</h1>
+      <p className="header-tagline">Fresh coffee, made your way.</p>
     </header>
   );
 }
