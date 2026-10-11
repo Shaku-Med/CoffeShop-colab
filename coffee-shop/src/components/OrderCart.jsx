@@ -22,7 +22,7 @@ function OrderCart({
           <div className="cart-items">
             {order.map((item) => (
               <OrderItem
-                key={item.id}
+                key={item.cartId}
                 item={item}
                 removeFromOrder={removeFromOrder}
                 updateQuantity={updateQuantity}

@@ -58,12 +58,32 @@ export const MENU_ITEMS = [
 
 ]
 
-function Menu() {
+function Menu({ searchTerm, category, quantitiesById, onSelectDrink }) {
+  const query = searchTerm.trim().toLowerCase()
+
+  const visibleItems = MENU_ITEMS.filter((drink) => {
+    const matchesCategory = category === 'All' || drink.category === category
+    const matchesSearch =
+      drink.name.toLowerCase().includes(query) ||
+      drink.description.toLowerCase().includes(query)
+
+    return matchesCategory && matchesSearch
+  })
+
   return (
     <section className="menu">
-      {MENU_ITEMS.map((drink) => (
-        <MenuItem key={drink.id} drink={drink} />
-      ))}
+      {visibleItems.length === 0 ? (
+        <p className="empty-menu">No drinks match your search.</p>
+      ) : (
+        visibleItems.map((drink) => (
+          <MenuItem
+            key={drink.id}
+            drink={drink}
+            qtyInCart={quantitiesById[drink.id] ?? 0}
+            onAdd={onSelectDrink}
+          />
+        ))
+      )}
     </section>
   )
 }

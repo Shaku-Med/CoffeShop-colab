@@ -13,6 +13,11 @@ function OrderItem({
 
         <div>
           <h3>{item.name}</h3>
+          {item.size && (
+            <p>
+              {[item.size, item.milk, item.sweetness, ...item.extras].join(" · ")}
+            </p>
+          )}
           <p>${item.price.toFixed(2)} each</p>
         </div>
       </div>
@@ -21,7 +26,7 @@ function OrderItem({
         <div className="quantity-controls">
           <button
             aria-label={`Decrease ${item.name} quantity`}
-            onClick={() => updateQuantity(item.id, -1)}
+            onClick={() => updateQuantity(item.cartId, -1)}
           >
             −
           </button>
@@ -30,7 +35,7 @@ function OrderItem({
 
           <button
             aria-label={`Increase ${item.name} quantity`}
-            onClick={() => updateQuantity(item.id, 1)}
+            onClick={() => updateQuantity(item.cartId, 1)}
           >
             +
           </button>
@@ -43,7 +48,7 @@ function OrderItem({
         <button
           className="remove-button"
           aria-label={`Remove ${item.name}`}
-          onClick={() => removeFromOrder(item.id)}
+          onClick={() => removeFromOrder(item.cartId)}
         >
           ×
         </button>
